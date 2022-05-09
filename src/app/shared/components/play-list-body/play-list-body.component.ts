@@ -8,8 +8,8 @@ import * as dataRaw from '../../../data/tracks.json'
   styleUrls: ['./play-list-body.component.css']
 })
 export class PlayListBodyComponent implements OnInit {
-  tracks: TrackModel[] = []
-
+  tracks: TrackModel[] = [];
+  optionSort: { property: string | null, order: string } = { property: null, order: 'asc' };
 
   constructor() { }
 
@@ -17,6 +17,15 @@ export class PlayListBodyComponent implements OnInit {
     const { data }: any = (dataRaw as any).default
     this.tracks = data;
     console.log(data, 'otro componente');
+  }
+
+  changeSort(property: string): void {
+    const { order } = this.optionSort
+    this.optionSort = {
+      property,
+      order: order === 'asc' ? 'desc' : 'asc'
+    }
+    console.log(this.optionSort, 'list')
   }
 
 }
