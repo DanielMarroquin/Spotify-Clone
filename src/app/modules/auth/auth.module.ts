@@ -2,12 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
-import { AuthPagesComponent } from './pages/auth-pages/auth-pages.component';
+import { LoginPagesComponent } from './pages/login-pages/login-pages.component';
 
 
 @NgModule({
   declarations: [
-    AuthPagesComponent
+    LoginPagesComponent
   ],
   imports: [
     CommonModule,
