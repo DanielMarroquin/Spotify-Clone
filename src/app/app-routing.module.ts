@@ -8,6 +8,7 @@ const routes: Routes = [
     path: 'auth', // TODO: Localhost:4200/
     loadChildren:() => import(`./modules/auth/auth.module`).then(m => m.AuthModule)
     // loadChildren apunta a la ruta del modulo/componente que se desee
+    // Se usa loadChildren para el concepto de carga perezosa 
   },
   {
     path: '',
