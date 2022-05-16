@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from "@modules/auth/services/auth.service";
 
 @Component({
   selector: 'app-auth-pages',
@@ -9,7 +10,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class LoginPagesComponent implements OnInit {
   formLogin: FormGroup = new FormGroup({});
 
-  constructor() { }
+  // NOTA: EN LA CLASE DE LOS COMPONENTES SE PUEDE REALIZAR LA INYECCCION DE DATOS
+  // DESDE CUALQUIER CLASE, EN ESTE CASO LA CLASE DECLARADA EN EL SERVICE ASIGNANDOLE UN SEUDONIMO
+
+  constructor( private authService: AuthService ) { }
 
   ngOnInit(): void {
     this.formLogin = new FormGroup(
@@ -28,8 +32,8 @@ export class LoginPagesComponent implements OnInit {
   }
 
   sendLogin(): void {
-    const body = this.formLogin.value;
-    console.log('tets', body);
+    const { email, password } = this.formLogin.value;
+    this.authService.sendCredentials(email, password);
   }
 
 }

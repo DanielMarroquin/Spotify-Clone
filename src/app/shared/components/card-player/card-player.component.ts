@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TrackModel } from '@core/models/tracks.model';
+import { MultimediaService } from "@shared/services/multimedia.service";
 
 @Component({
   selector: 'app-card-player',
@@ -17,10 +18,15 @@ export class CardPlayerComponent implements OnInit {
     cover: ''
   };
 
-
-  constructor() { }
+  constructor( private multimediaService: MultimediaService ) { }
 
   ngOnInit(): void {
+  }
+
+  //Método para disparar el evento "Reproducir Musica"
+  sendPlay(track: TrackModel): void {
+    console.log('Enviando cancion al reproductor', track)
+    this.multimediaService.callBack.emit(track)
   }
 
 }
