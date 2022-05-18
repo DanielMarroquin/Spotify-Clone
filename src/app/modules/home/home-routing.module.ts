@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'history',
     loadChildren:() => import('@modules/history/history.module').then(m => m.HistoryModule)
   },
+  {
+    path: '**', //Cuando no existe la ruta nos direcciona
+    redirectTo: '/tracks'
+  }
 ];
 
 @NgModule({

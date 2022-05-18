@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "@modules/auth/services/auth.service";
+import { CookieService } from "ngx-cookie-service";
 
 @Component({
   selector: 'app-auth-pages',
@@ -9,11 +10,12 @@ import { AuthService } from "@modules/auth/services/auth.service";
 })
 export class LoginPagesComponent implements OnInit {
   formLogin: FormGroup = new FormGroup({});
-
+  errorSession: boolean = false;
   // NOTA: EN LA CLASE DE LOS COMPONENTES SE PUEDE REALIZAR LA INYECCCION DE DATOS
   // DESDE CUALQUIER CLASE, EN ESTE CASO LA CLASE DECLARADA EN EL SERVICE ASIGNANDOLE UN SEUDONIMO
 
-  constructor( private authService: AuthService ) { }
+  constructor( private authService: AuthService,
+               private cookie: CookieService ) { }
 
   ngOnInit(): void {
     this.formLogin = new FormGroup(
@@ -33,7 +35,16 @@ export class LoginPagesComponent implements OnInit {
 
   sendLogin(): void {
     const { email, password } = this.formLogin.value;
-    this.authService.sendCredentials(email, password);
+    this.authService.sendCredentials(email, password).subscribe(responseOk => {
+      console.log('Session start correctly')
+      //Le añadimos una validacion por cookie
+      const { tokenSession, data } = responseOk
+      this.cookie.set('token', tokenSession, 4 ,'/')
+    },
+      err => {
+        this.errorSession = true
+        console.log('Error with email o password');
+      })
   }
 
 }
