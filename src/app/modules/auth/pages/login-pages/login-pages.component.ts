@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from "@modules/auth/services/auth.service";
 import { CookieService } from "ngx-cookie-service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-auth-pages',
@@ -15,7 +16,8 @@ export class LoginPagesComponent implements OnInit {
   // DESDE CUALQUIER CLASE, EN ESTE CASO LA CLASE DECLARADA EN EL SERVICE ASIGNANDOLE UN SEUDONIMO
 
   constructor( private authService: AuthService,
-               private cookie: CookieService ) { }
+               private cookie: CookieService,
+               private router: Router) { }
 
   ngOnInit(): void {
     this.formLogin = new FormGroup(
@@ -38,8 +40,9 @@ export class LoginPagesComponent implements OnInit {
     this.authService.sendCredentials(email, password).subscribe(responseOk => {
       console.log('Session start correctly')
       //Le añadimos una validacion por cookie
-      const { tokenSession, data } = responseOk
-      this.cookie.set('token', tokenSession, 4 ,'/')
+      const { tokenSession, data } = responseOk;
+      this.cookie.set('token', tokenSession, 4 ,'/');
+      this.router.navigate(['/', 'tracks']);
     },
       err => {
         this.errorSession = true
