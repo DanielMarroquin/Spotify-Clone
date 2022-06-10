@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SearchService } from "@modules/history/services/search.service";
 
 @Component({
   selector: 'app-history-pages',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistoryPagesComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private searchService: SearchService
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  getDataSearch(event: string): void {
+    //TODO: Se captura la informacion del campo y se comparte
+    console.log('==> Entrando al componente padre', event)
+    this.searchService.searchTracks$(event).subscribe( res => {
+      console.log('.....', res);
+    })
   }
 
 }
