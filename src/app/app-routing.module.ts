@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePagesComponent } from '@modules/home/pages/home-pages/home-pages.component';
 import { HeaderUserComponent } from './shared/components/header-user/header-user.component';
 import {SessionGuard} from "@core/guards/session.guard";
+import { HistoryPagesComponent } from "@modules/history/pages/history-pages/history-pages.component";
 
 const routes: Routes = [
   {
@@ -16,6 +17,11 @@ const routes: Routes = [
     component: HomePagesComponent,
     loadChildren:() => import(`./modules/home/home.module`).then(m => m.HomeModule),
     canActivate: [SessionGuard]
+  },
+  {
+    path: 'history',
+    component: HistoryPagesComponent,
+    loadChildren:() => import(`./modules/history/history.module`).then(m => m.HistoryModule)
   }
 ];
 
