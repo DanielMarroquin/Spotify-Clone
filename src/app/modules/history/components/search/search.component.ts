@@ -17,7 +17,7 @@ export class SearchComponent implements OnInit {
   callSearch(data: string): void {
     if (data.length >= 3 ) {
       this.callBackData.emit(data)
-      console.log(data, 'music')
+      console.log(this.callBackData, 'music')
     }
   }
 

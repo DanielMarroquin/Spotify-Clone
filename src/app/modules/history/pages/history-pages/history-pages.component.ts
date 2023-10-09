@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { TrackModel } from '@core/models/tracks.model';
 import { SearchService } from "@modules/history/services/search.service";
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-history-pages',
@@ -7,6 +9,8 @@ import { SearchService } from "@modules/history/services/search.service";
   styleUrls: ['./history-pages.component.css']
 })
 export class HistoryPagesComponent implements OnInit {
+
+  listResults$: Observable<any> = of([])
 
   constructor(
     private searchService: SearchService
@@ -18,9 +22,9 @@ export class HistoryPagesComponent implements OnInit {
   getDataSearch(event: string): void {
     //TODO: Se captura la informacion del campo y se comparte
     console.log('==> Entrando al componente padre', event)
-    this.searchService.searchTracks$(event).subscribe( res => {
-      console.log('.....', res);
-    })
+
+    // this.listResults$ Al ser un observable ya se suscribe 
+    this.listResults$ = this.searchService.searchTracks$(event)
   }
 
 }
