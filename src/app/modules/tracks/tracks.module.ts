@@ -14,7 +14,8 @@ import { HttpClientModule } from "@angular/common/http";
   imports: [
     CommonModule,
     TracksRoutingModule,
-    SharedModule
+    SharedModule,
+    HttpClientModule
   ]
 })
 export class TracksModule { }

@@ -7,6 +7,7 @@ import { environment } from "../../../../environments/environment";
 @Injectable({
   providedIn: 'root'
 })
+
 export class TrackService {
   private readonly URL = environment.api;
 
@@ -17,8 +18,11 @@ export class TrackService {
   getAllTracks$(): Observable<any> {
     return this.httpClient.get(`${this.URL}/tracks`).pipe(
       map(({data}: any) => {
+        console.log(data)
         return data
+        
       })
+      
     )
   }
 

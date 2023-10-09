@@ -13,13 +13,14 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
     cover: 'https://jenesaispop.com/wp-content/uploads/2009/09/guetta_onelove.jpg',
     album: 'One Love',
     name: 'Getting Over',
-    url: 'http://localhost:3000/track.mp3',
+    url: 'http://localhost:3001/track.mp3',
     _id: 1
   }
 
   listObservables$: Array<Subscription> = [];
 
-  constructor( private multimediaService: MultimediaService) { }
+  constructor( private multimediaService: MultimediaService) {
+   }
 
   ngOnInit(): void {
     const observer$1: Subscription = this.multimediaService.callBack.subscribe(
@@ -27,8 +28,9 @@ export class MediaPlayerComponent implements OnInit, OnDestroy {
         console.log('Recibiendo cancion', response)
       }
     )
-
+    console.log(observer$1.add, 'cancion')
     this.listObservables$ = [observer$1]
+    
   }
 
   ngOnDestroy(): void {

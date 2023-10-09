@@ -46,7 +46,7 @@ export class LoginPagesComponent implements OnInit {
     },
       err => {
         this.errorSession = true
-        console.log('Error with email o password');
+        console.log(err, 'Error with email o password');
       })
   }
 
