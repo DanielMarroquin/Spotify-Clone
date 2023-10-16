@@ -25,8 +25,7 @@ export class CardPlayerComponent implements OnInit {
 
   //Método para disparar el evento "Reproducir Musica"
   sendPlay(track: TrackModel): void {
-    console.log('Enviando cancion al reproductor', track)
-    this.multimediaService.callBack.emit(track)
+    this.multimediaService.trackInfo$.next(track)
   }
 
 }
